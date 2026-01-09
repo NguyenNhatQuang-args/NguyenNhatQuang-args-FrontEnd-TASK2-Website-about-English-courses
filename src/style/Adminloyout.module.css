@@ -1,0 +1,28 @@
+.root {
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Sidebar */
+.sider {
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
+/* Phần bên phải */
+.main {
+  margin-left: 256px;
+  min-height: 100vh;
+}
+
+/* Content */
+.content {
+  padding: 24px;
+  background: #f0f2f5;
+  min-height: 100vh;
+  overflow: hidden;
+  width: 100%;
+}

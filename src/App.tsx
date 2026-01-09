@@ -1,69 +1,20 @@
-import { useState } from 'react';
-import LoginForm from './components/LoginForm';
-import RegisterForm from './components/RegisterForm';
-import './App.css';
-
-interface User {
-  id: string;
-  username: string;
-  fullname: string;
-  email: string;
-  role: string;
-}
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import AdminLayout from "./layout/Adminlayout";
+import Roles from "./pages/Admin/Roles";
+import User from "./pages/Admin/User";
 
 function App() {
-  const [isLogin, setIsLogin] = useState(true);
-  const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(null);
-
-  const handleLoginSuccess = (data: { user: unknown; accessToken: string }) => {
-    setUser(data.user as User);
-    setToken(data.accessToken);
-  };
-
-  const handleLogout = () => {
-    setUser(null);
-    setToken(null);
-  };
-
-  if (user && token) {
-    return (
-      <div className="app">
-        <div className="dashboard">
-          <h1>Xin chào, {user.fullname}!</h1>
-          <div className="user-info">
-            <p><strong>Username:</strong> {user.username}</p>
-            <p><strong>Email:</strong> {user.email}</p>
-            <p><strong>Role:</strong> {user.role}</p>
-            <p><strong>ID:</strong> {user.id}</p>
-          </div>
-          <div className="token-info">
-            <h3>Access Token:</h3>
-            <textarea readOnly value={token} rows={4} />
-          </div>
-          <button onClick={handleLogout} className="logout-btn">
-            Đăng xuất
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="app">
-      <h1>Backend API Demo</h1>
-      {isLogin ? (
-        <LoginForm
-          onSuccess={handleLoginSuccess}
-          onSwitchToRegister={() => setIsLogin(false)}
-        />
-      ) : (
-        <RegisterForm
-          onSuccess={() => setIsLogin(true)}
-          onSwitchToLogin={() => setIsLogin(true)}
-        />
-      )}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navigate to="/admin/roles" />} />
+
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="roles" element={<Roles />} />
+          <Route path="users" element={<User />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
