@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
+import SentenceBuilder from './components/SentenceBuilder/SentenceBuilder';
 import './App.css';
 
 interface User {
@@ -29,6 +30,7 @@ function App() {
   if (user && token) {
     return (
       <div className="app">
+        <SentenceBuilder />
         <div className="dashboard">
           <h1>Xin chào, {user.fullname}!</h1>
           <div className="user-info">
