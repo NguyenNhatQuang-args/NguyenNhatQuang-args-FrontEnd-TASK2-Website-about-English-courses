@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function LessonCreate() {
   const navigate = useNavigate();
@@ -7,14 +7,15 @@ export default function LessonCreate() {
   const [title, setTitle] = useState("");
   const [level, setLevel] = useState("Beginner");
   const [price, setPrice] = useState<number>(0);
+  const [description, setDescription] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // FE demo: chỉ log ra trước, sau này nối API
-    console.log("Create lesson:", { title, level, price });
+    // Demo FE (sau này nối API)
+    console.log("Create lesson:", { title, level, price, description });
 
-    alert("Tạo bài học thành công (demo) ✅");
+    alert("✅ Tạo bài học thành công (demo)");
     navigate("/admin/lessons");
   };
 
@@ -22,7 +23,11 @@ export default function LessonCreate() {
     <div style={{ padding: 20 }}>
       <h2>➕ Admin - Tạo bài học</h2>
 
-      <form onSubmit={handleSubmit} style={{ maxWidth: 500 }}>
+      <div style={{ margin: "12px 0" }}>
+        <Link to="/admin/lessons">⬅ Quay lại danh sách</Link>
+      </div>
+
+      <form onSubmit={handleSubmit} style={{ maxWidth: 520 }}>
         <div style={{ marginTop: 12 }}>
           <label>Tên bài học</label>
           <input
@@ -36,11 +41,7 @@ export default function LessonCreate() {
 
         <div style={{ marginTop: 12 }}>
           <label>Trình độ</label>
-          <select
-            value={level}
-            onChange={(e) => setLevel(e.target.value)}
-            style={inputStyle}
-          >
+          <select value={level} onChange={(e) => setLevel(e.target.value)} style={inputStyle}>
             <option value="Beginner">Beginner</option>
             <option value="Intermediate">Intermediate</option>
             <option value="Advanced">Advanced</option>
@@ -58,8 +59,18 @@ export default function LessonCreate() {
           />
         </div>
 
+        <div style={{ marginTop: 12 }}>
+          <label>Mô tả</label>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Mô tả bài học..."
+            style={{ ...inputStyle, height: 90 }}
+          />
+        </div>
+
         <div style={{ marginTop: 16 }}>
-          <button type="submit" style={{ padding: "8px 12px", cursor: "pointer" }}>
+          <button type="submit" style={btnStyle}>
             Lưu bài học
           </button>
         </div>
@@ -72,4 +83,11 @@ const inputStyle: React.CSSProperties = {
   width: "100%",
   padding: 10,
   marginTop: 6,
+  border: "1px solid #ccc",
+  borderRadius: 6,
+};
+
+const btnStyle: React.CSSProperties = {
+  padding: "8px 12px",
+  cursor: "pointer",
 };
