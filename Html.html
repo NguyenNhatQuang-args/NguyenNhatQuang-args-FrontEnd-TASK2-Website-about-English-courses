@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+
+        <section>
+            <h2>Lớp học</h2>
+            <input id="className" placeholder="Tên lớp học" />
+            <button onclick="addClass()">Thêm lớp</button>
+
+            <ul id="classList"></ul>
+        </section>
+
+        <section>
+            <h2>Khóa học</h2>
+            <input id="courseName" placeholder="Tên khóa học" />
+            <button onclick="addCourse()">Thêm khóa</button>
+
+            <ul id="courseList"></ul>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
